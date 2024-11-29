@@ -1,17 +1,37 @@
-// Pedir la calificación numérica al usuario
-const grade = parseFloat(prompt("Introduce la calificación (0-10):"));
+document.getElementById('startBtn').addEventListener('click', function() {
+    // Obtener el número del input
+    const number = document.getElementById('numberInput').value;
+    
+    // Limpiar el área de resultados
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = ''; // Limpiar el resultado previo
 
-// Determinar la calificación en letras
-if (grade < 5) {
-    console.log("SUSPENSA");
-} else if (grade >= 5 && grade < 7) {
-    console.log("APROBADA");
-} else if (grade >= 7 && grade < 9) {
-    console.log("NOTABLE");
-} else if (grade >= 9 && grade < 10) {
-    console.log("SOBRESALIENTE");
-} else if (grade === 10) {
-    console.log("MATRÍCULA DE HONOR");
-} else {
-    console.log("Calificación inválida.");
-}
+    // Si el número no es válido
+    if (isNaN(number) || number <= 0) {
+        resultDiv.innerHTML = 'Por favor, ingresa un número válido mayor que 0.';
+        return;
+    }
+
+    // Realizamos el ciclo FizzBuzz hasta el número dado
+    let result = '';
+
+    // Comprobar si el número es múltiplo de 3 y 5 (FizzBuzz)
+    if (number % 3 === 0 && number % 5 === 0) {
+        result = 'FizzBuzz';
+    }
+    // Si solo es múltiplo de 3
+    else if (number % 3 === 0) {
+        result = 'Fizz';
+    }
+    // Si solo es múltiplo de 5
+    else if (number % 5 === 0) {
+        result = 'Buzz';
+    }
+
+    // Si hay un resultado, mostrarlo
+    if (result) {
+        resultDiv.innerHTML = `<div class="${result.toLowerCase()}">${result}</div>`;
+    } else {
+        resultDiv.innerHTML = 'El número no es múltiplo de 3 ni de 5.';
+    }
+});
