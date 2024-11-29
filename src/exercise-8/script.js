@@ -1,29 +1,27 @@
-// Obtener los elementos del DOM
-const numInput = document.getElementById('numInput');
-const result = document.getElementById('result');
+// Obtenemos los elementos del DOM
+const numberInput = document.getElementById('numberInput');
+const checkButton = document.getElementById('checkButton');
+const resultElement = document.getElementById('result');
 
 // Función para verificar si el número es par o impar
-function checkEvenOdd() {
-    const number = parseInt(numInput.value); // Obtener el número ingresado
-
-    // Limpiar el mensaje anterior
-    result.textContent = '';
-
-    // Verificar si el número es válido
+checkButton.addEventListener('click', function() {
+    const number = parseInt(numberInput.value); // Convertimos el valor del input a un número entero
+    
+    // Verificamos si el número es válido
     if (isNaN(number)) {
-        result.textContent = 'Por favor, ingresa un número válido.';
-        result.className = 'error';  // Aplicar el estilo de error
-    } else {
-        // Si el número es válido, verificar si es par o impar
-        if (number % 2 === 0) {
-            result.textContent = `${number} es par`;
-            result.className = 'par';  // Aplicar el estilo de número par
-        } else {
-            result.textContent = `${number} es impar`;
-            result.className = 'impar';  // Aplicar el estilo de número impar
-        }
+        resultElement.textContent = 'Por favor, introduce un número válido.';
+        resultElement.classList.remove('even', 'odd'); // Eliminamos clases previas
+        return;
     }
-}
 
-// Asignar el evento al botón para ejecutar la función cuando se haga clic
-document.getElementById('checkNumber').addEventListener('click', checkEvenOdd);
+    // Verificamos si el número es par o impar
+    if (number % 2 === 0) {
+        resultElement.textContent = `${number} es un número par.`;
+        resultElement.classList.add('even'); // Aplicamos estilo de número par
+        resultElement.classList.remove('odd'); // Quitamos el estilo de número impar
+    } else {
+        resultElement.textContent = `${number} es un número impar.`;
+        resultElement.classList.add('odd'); // Aplicamos estilo de número impar
+        resultElement.classList.remove('even'); // Quitamos el estilo de número par
+    }
+});
